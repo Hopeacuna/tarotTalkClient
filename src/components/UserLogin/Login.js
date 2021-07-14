@@ -7,7 +7,7 @@ const Login = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(email, password);
+        // console.log(email, password);
         fetch("http://localhost:3000/user/login", {
             method: 'POST',
             body: JSON.stringify({ email: email, password: password}),
@@ -18,6 +18,8 @@ const Login = (props) => {
             (response) => response.json()
         ).then((data) => {
             props.updateToken(data.token)
+            props.updateUserId(data.user.id)
+            console.log(data)
         })
     }
 

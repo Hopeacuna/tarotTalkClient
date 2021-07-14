@@ -4,15 +4,16 @@ import {Table, Button} from 'reactstrap';
 const ReflectionTable = (props) => {
 
 
-    // const deleteReflection = (reflection) => {
-    //     fetch(`http://localhost:3000/log/${reflection.id}`, {
-    //         method: 'DELETE',
-    //         headers: new Headers({
-    //             'Content-Type': 'application/json',
-    //             'Authorization': props.token
-    //         })
-    //     }) 
-    //     .then(() => props.fetchReflection
+    const deleteReflection = (reflection) => {
+        fetch(`http://localhost:3000/log/${reflection.id}`, {
+            method: 'DELETE',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Authorization': props.token,
+            })
+        }) 
+        .then(() => props.fetchReflection)
+    }
 
     const reflectionMapper = () => {
         return props.reflection.map((reflection, index) => {
@@ -25,7 +26,7 @@ const ReflectionTable = (props) => {
                     <td>{reflection.date}</td>
                     <td>
                         <Button color='warning'>Update</Button>
-                        {/* <Button color='danger' onClick={() => {deleteWorkout(workout)}}>Delete</Button> */}
+                        <td><Button onClick={() => { deleteReflection(reflection.id) }}>Delete</Button></td>
                     </td>
                 </tr>
             )

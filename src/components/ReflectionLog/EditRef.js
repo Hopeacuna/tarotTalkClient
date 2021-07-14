@@ -39,7 +39,7 @@ const ReflectionEdit = (props) => {
                     </FormGroup>
 
                 
-                    <Button type="submit">Update the Workout!</Button>
+                    <Button type="submit">Update the Journal!</Button>
                 </Form>
             </ModalBody>
         </Modal>

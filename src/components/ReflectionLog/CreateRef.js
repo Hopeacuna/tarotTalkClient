@@ -12,8 +12,9 @@ const RefCreate = (props) => {
         e.preventDefault();
         fetch('http://localhost:3000/reflection/create', {
             method: 'POST',
-            body: JSON.stringify({ref: {drawnCard: drawnCard, title: title, reflection: reflection, date: date}}),
+            body: JSON.stringify({ref: {drawnCard: drawnCard, title: title, reflection: reflection, date: date, idOfUser: localStorage.getItem('userId')}}),
             headers: new Headers({
+                'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With',
                 'Content-Type': 'application/json',
                 'Authorization': props.token
             })

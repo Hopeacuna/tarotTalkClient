@@ -1,40 +1,41 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react';
+// import CardDelMap from './CardDelMap';
+import EditCard from './EditCard';
 
-class TarotFetch extends Component {
-  constructor() {
-    super()
-    this.state = {
-      name: '',
-      keywords: '',
-    }
-  }
 
-  fetchTarot() {
-    let min = Math.ceil(1);
-    let max = Math.floor(78);
-    let cardNum = Math.floor(Math.random() * (max - min) + min);
-    fetch(`http://localhost:3000/cards/${cardNum}`, {
-      method: 'GET'
-    }).then(res => res.json())
-      .then(res => {
-        this.setState({
-          name: res.name,
-          keywords: res.keywords,
-        })
-      })
-      .catch((err) => console.log(err))
-  }
 
-  render() {
+const ShowCards = (props) => {
+
+const [cards, setCards] = useState([]);
+
+
+const tarotFetch = () => {
+      fetch(`http://localhost:3000/card/`, {
+      method: "GET",
+      headers: new Headers ({
+        'Content-Type': 'application/json',
+        'Authorization': props.sessionToken
+    })
+  })
+  .then( (res) => res.json())
+  .then(json => setCards(json))
+  .then(console.log("cards", cards))
+}
+
+// create tarotFetch()
+
+
+  // render() {
     return (
-      <div className={'wrapper'}>
-        <button className={'start'} onClick={() => this.fetchTarot()}>Draw</button>
-        <div className={'cardInfo'}>
-          <h1 className={'cardName'}>{this.res.name}</h1>
+      <div >
+        <button  onClick={() => tarotFetch()}>Draw</button>
+        {/* <CardDelMap /> */}
+        <EditCard />
+        <div >
         </div>
       </div>
     )
   }
-}
 
-export default TarotFetch;
+
+export default ShowCards;

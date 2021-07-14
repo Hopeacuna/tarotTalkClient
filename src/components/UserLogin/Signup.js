@@ -19,6 +19,7 @@ const Signup = (props) => {
             (response) => response.json()
         ).then((data) => {
             props.updateToken(data.token)
+            props.updateUserId(data.user.id)
             console.log(data);
         })
     }
